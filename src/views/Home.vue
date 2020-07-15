@@ -1,9 +1,9 @@
 <template>
     <div>
         <AppBar/>
-        <v-content>
+        <v-main>
             <HomeContent/>
-        </v-content>
+        </v-main>
         <Footer/>
     </div>
 </template>
