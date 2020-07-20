@@ -51,7 +51,7 @@
 
             <v-row justify="center">
                 <v-col v-for="image in croppedImages" :key="image" class="col-3">
-                    <v-img v-if="croppedImages != null" :src="image"></v-img>
+                    <v-img class="img-border" v-if="croppedImages != null" :src="image"></v-img>
                 </v-col>
             </v-row>
 
@@ -118,23 +118,28 @@
 
 <style scoped>
 
-.upload-button {
-    margin: 10px;
-    width: 250px;
-    height: 250px;
-    line-height: 190px;
-    border-style: solid;
-    border-radius: 15px;
-    animation: blinkingBackground 3s infinite;
-}
+    .upload-button {
+        margin: 10px;
+        width: 250px;
+        height: 250px;
+        line-height: 190px;
+        border-style: solid;
+        border-radius: 15px;
+        animation: blinkingBackground 3s infinite;
+    }
 
-@keyframes blinkingBackground{
-    50%		{ border-color: orange;}
-}
+    @keyframes blinkingBackground{
+        50%		{ border-color: orange;}
+    }
 
-.cropper {
-    height: 400px;
-    background: #DDD;
-}
+    .cropper {
+        height: 400px;
+        background: #DDD;
+    }
+
+    .img-border {
+        border: 35px solid transparent;
+        border-image: url(../assets/hovsta_bright_full.png) 100 stretch;
+    }
 
 </style>
