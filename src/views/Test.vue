@@ -2,8 +2,9 @@
     <v-container>
         <v-row justify="center">
             <v-col class="col-3">
-                <div class="image-border">
+                <div class="heta-image">
                     <v-img aspect-ratio="1" contain src="@/assets/test.png"></v-img>
+                    <div class="heta-image-border"></div>
                 </div>
             </v-col>
         </v-row>
@@ -17,10 +18,7 @@
 </script>
 
 <style scoped>
-    .image-border {
-        background-image: url(../assets/hovsta_bright_full.png);
-        width: 100%;git
-        height: 100%;
+    .heta-image {
+        box-shadow: 8px 10px 10px grey;
     }
-
 </style>
