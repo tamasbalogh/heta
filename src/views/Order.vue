@@ -1,90 +1,121 @@
 <template>
-<!--        <v-app-bar height="64" class="grey darken-2 white&#45;&#45;text">-->
-<!--            <v-row>-->
-<!--                <v-col>-->
-<!--                    <v-toolbar-title class="d-flex justify-space-around"> {{ this.$route.params.type }} kollázs összeállítás</v-toolbar-title>-->
-<!--                </v-col>-->
-<!--            </v-row>-->
-<!--        </v-app-bar>-->
-        <v-container fluid fill-height class="bg-img">
-            <v-row justify="center">
-                <v-flex class="xs6 md3 lg2">
-                    <v-card class="pa-4">
-                        <v-row>
-                            <v-col>
-                                <v-hover v-slot:default="{ hover }">
-                                    <v-card :elevation="hover ? 10 : 2" align="center" class="pa-4" v-on:click="onInputClick()">
-                                        <p>Képek feltöltése</p>
-                                        <v-icon large>mdi-upload</v-icon>
-                                        <input ref="uploader" class="d-none" type="file" accept="image/*" @change="onImagePick()">
-                                    </v-card>
-                                </v-hover>
-                            </v-col>
-                        </v-row>
-                        <v-row>
-                            <v-col>
-                                <v-hover v-slot:default="{ hover }">
-                                    <v-card :elevation="hover ? 10 : 2" align="center" class="pa-4" v-on:click="imageOnline()">
-                                        <p>Online képek</p>
-                                        <v-row>
-                                            <v-col><v-icon large>mdi-facebook</v-icon></v-col>
-                                            <v-col><v-icon large>mdi-instagram</v-icon></v-col>
-                                        </v-row>
-                                    </v-card>
-                                </v-hover>
-                            </v-col>
-                        </v-row>
-                    </v-card>
-                </v-flex>
-            </v-row>
-
-            <v-dialog v-model="isImagePicked" persistent max-width="600px">
-                <v-card>
-                    <Cropper ref="cropper" class="cropper" :src="selectedImage" :stencil-props="{ aspectRatio: 1/1 }"/>
-                    <v-card-actions>
-                        <v-btn color="green darken-1" text @click="doCrop()">Mentés</v-btn>
-                        <v-spacer/>
-                        <v-btn color="red darken-1" text @click="isImagePicked = false">Elvetés</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
-
-            <v-row justify="center">
-                <v-col v-for="image in croppedImages" :key="image" class="col-3">
-                    <v-img class="img-border" v-if="croppedImages != null" :src="image"></v-img>
+    <v-container>
+        <v-row class="fill-height" align="center" justify="center">
+            <template v-for="(frame, i) in frames">
+                <v-col :key="i" cols="12" md="2">
+                    <v-hover v-slot:default="{ hover }">
+                        <v-card class="frame mx-2" :elevation="hover ? 12 : 2" :class="[{'on-hover': hover}, {'selected': frame.selected}]" v-on:click="selectFrame(frame)">
+                            <v-img :src="require('@/assets/frames/' + frame.id + '.png' )"/>
+                        </v-card>
+                    </v-hover>
                 </v-col>
-            </v-row>
+            </template>
+        </v-row>
+        <v-row v-if="selectedFrame != null" justify="center">
+            <v-flex class="xs6 md3 lg2">
+                <v-card class="ma-4 pa-4">
+                    <v-row>
+                        <v-col>
+                            <v-hover v-slot:default="{ hover }">
+                                <v-card :elevation="hover ? 10 : 2" align="center" class="pa-4" v-on:click="onInputClick()">
+                                    <p>Képek feltöltése</p>
+                                    <v-icon large>mdi-upload</v-icon>
+                                    <input ref="uploader" class="d-none" type="file" accept="image/*" @change="onImagePick()">
+                                </v-card>
+                            </v-hover>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col>
+                            <v-hover v-slot:default="{ hover }">
+                                <v-card :elevation="hover ? 10 : 2" align="center" class="pa-4" v-on:click="imageOnline()">
+                                    <p>Online képek</p>
+                                    <v-row>
+                                        <v-col><v-icon large>mdi-facebook</v-icon></v-col>
+                                        <v-col><v-icon large>mdi-instagram</v-icon></v-col>
+                                    </v-row>
+                                </v-card>
+                            </v-hover>
+                        </v-col>
+                    </v-row>
+                </v-card>
+            </v-flex>
+        </v-row>
 
-        </v-container>
-<!--        <v-footer class="grey darken-2" absolute padless>-->
-<!--            <v-row>-->
-<!--                <v-col>-->
-<!--                    <div class="text-center">-->
-<!--                        <v-btn color="white" class="pa-2" outlined >Rendelés</v-btn>-->
-<!--                   </div>-->
-<!--                </v-col>-->
-<!--            </v-row>-->
-<!--        </v-footer>-->
+        <v-dialog v-model="isImagePicked" persistent max-width="600px">
+            <v-card>
+                <Cropper ref="cropper" class="cropper" :src="selectedImage" :stencil-props="{ aspectRatio: 1/1 }"/>
+                <v-card-actions>
+                    <v-btn color="green darken-1" text @click="doCrop()">Mentés</v-btn>
+                    <v-spacer/>
+                    <v-btn color="red darken-1" text @click="isImagePicked = false">Elvetés</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
+        <v-row justify="center">
+            <v-col v-for="image in croppedImages" :key="image" :class="'image' + selectedFrame.type" cols="12" class="xs4">
+                <v-img aspect-ratio="1" v-if="croppedImages != null" :src="image"/>
+                <v-img class="imageFrame" :src="require('@/assets/frames/' + selectedFrame.id + '.png' )"/>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
-<script>
 
+
+<script>
     import { Cropper } from 'vue-advanced-cropper'
 
     export default {
-        name: "Order",
-        data () {
-            return {
-                selectedImages: [],
-                selectedImage: null,
+        data: () => ({
+            frames: [
+                {
+                    id: 1,
+                    title: 'Világos keret',
+                    selected: false,
+                    color: 'Bright',
+                    type: 'Full'
+                },
+                {
+                    id: 2,
+                    title: 'Világos keret paszpartuval',
+                    selected: false,
+                    color: 'Bright',
+                    type: 'Mount'
+                },
+                {
+                    id: 3,
+                    title: 'Sötét keret',
+                    selected: false,
+                    color: 'Dark',
+                    type: 'Full'
+                },
+                {
+                    id: 4,
+                    title: 'Sötét keret paszpartuval',
+                    selected: false,
+                    color: 'Dark',
+                    type: 'Mount'
+                },
+            ],
+            selectedFrame: null,
 
-                croppedImages: [],
-                croppedImage: null,
-
-                isImagePicked: false,
-            }
-        },
+            selectedImages: [],
+            selectedImage: null,
+            croppedImages: [],
+            croppedImage: null,
+            isImagePicked: false,
+        }),
         methods: {
+            selectFrame(frame){
+                for (var i = 0; i < this.frames.length; i++) {
+                    this.frames[i].selected = false;
+                }
+                frame.selected = true
+                console.log("selected frame.id is: " + frame.id)
+                this.selectedFrame = frame
+            },
             //trick because button acts as input
             onInputClick(){
                 this.$refs.uploader.click()
@@ -139,7 +170,32 @@
 
     .img-border {
         border: 35px solid transparent;
-        border-image: url(../assets/hovsta_bright_full.png) 100 stretch;
+        border-image: url(../assets/frames/1.png) 100 stretch;
+    }
+
+    .frame {
+        transition: opacity .3s ease-in-out;
+    }
+    .frame:not(.on-hover) {
+        opacity: 0.4;
+    }
+    .frame.selected {
+        opacity: 1;
+    }
+
+    .imageFull {
+        position: relative;
+        padding: 60px;
+    }
+    .imageMount {
+        position: relative;
+        padding: 310px;
+    }
+
+    .imageFrame {
+        position: absolute;
+        top: 0px;
+        left: 0px;
     }
 
 </style>
