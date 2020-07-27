@@ -29,6 +29,19 @@
                 <v-img class="frame-paspartou" src="@/assets/frames/4.png"></v-img>
             </v-col>
         </v-row>
+        <v-row>
+            <v-col>
+                <div class="test">
+                    <div class="preview-test">
+                        <v-img src="@/assets/test.png" ></v-img>
+                    </div>
+                    <div class="frame-test">
+                        <v-img class="frame-test-direct hidden-test" src="@/assets/frames/1.png"/>
+                        <v-img class="frame-test-direct" src="@/assets/frames/3.png"/>
+                    </div>
+                </div>
+            </v-col>
+        </v-row>
     </v-container>
 </template>
 
@@ -73,6 +86,35 @@
 </script>
 
 <style scoped>
+
+    .test {
+        width: 400px;
+        height: 400px;
+        position: relative;
+    }
+
+    .preview-test {
+        position: absolute;
+        width: 360px;
+        height: 360px;
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+
+    .frame-test {
+        position: absolute;
+        width: 100%;
+    }
+
+    .frame-test-direct {
+        position: absolute;
+        width: 100%;
+    }
+
+    .hidden-test {
+        visibility: hidden;
+    }
+
     .image-full {
         position: relative;
         padding: 15px;
