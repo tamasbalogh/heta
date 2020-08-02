@@ -14,19 +14,19 @@
         <v-row justify="center">
             <v-col class="image-full col-3 mx-2">
                     <v-img aspect-ratio="1" contain src="@/assets/test.png"></v-img>
-                    <v-img class="frame-full" src="@/assets/frames/1.png"></v-img>
+                    <v-img class="frame-full" src="@/assets/frames/bright.png"></v-img>
             </v-col>
             <v-col class="image-paspartou col-3 mx-2">
                 <v-img aspect-ratio="1" contain src="@/assets/test.png"></v-img>
-                <v-img class="frame-paspartou" src="@/assets/frames/2.png"></v-img>
+                <v-img class="frame-paspartou" src="@/assets/frames/bright_pp.png"></v-img>
             </v-col>
             <v-col class="image-full col-3 mx-2">
                 <v-img aspect-ratio="1" contain src="@/assets/test.png"></v-img>
-                <v-img class="frame-full" src="@/assets/frames/3.png"></v-img>
+                <v-img class="frame-full" src="@/assets/frames/dark.png"></v-img>
             </v-col>
             <v-col class="image-paspartou col-3 mx-2">
                 <v-img aspect-ratio="1" contain src="@/assets/test.png"></v-img>
-                <v-img class="frame-paspartou" src="@/assets/frames/4.png"></v-img>
+                <v-img class="frame-paspartou" src="@/assets/frames/dark_pp.png"></v-img>
             </v-col>
         </v-row>
         <v-row>
@@ -36,8 +36,8 @@
                         <v-img src="@/assets/test.png" ></v-img>
                     </div>
                     <div class="frame-test">
-                        <v-img class="frame-test-direct hidden-test" src="@/assets/frames/1.png"/>
-                        <v-img class="frame-test-direct" src="@/assets/frames/3.png"/>
+                        <v-img class="frame-test-direct hidden-test" src="@/assets/frames/bright.png"/>
+                        <v-img class="frame-test-direct" src="@/assets/frames/dark.png"/>
                     </div>
                 </div>
             </v-col>

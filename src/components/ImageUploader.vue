@@ -1,13 +1,15 @@
 <template>
-    <v-row class="fill-height" align="center" justify="space-around">
-        <v-col align="center" cols="3">
-            <v-btn x-large icon @click="onUploadClick()" ><v-icon>mdi-upload</v-icon></v-btn>
+    <v-row class="fill-height" align="center" justify="center">
+        <v-col cols="3" align="center">
+            <div  @click="onUploadClick()" class="uploader">
+                <v-icon class="uploaderIcon" color="teal" x-large>mdi-upload</v-icon>
+            </div>
             <input class="d-none" ref="uploader" type="file" accept="image/*" @change="onImagePick()">
         </v-col>
-        <v-col v-for="image in croppedImages" :key="image" cols="3">
+        <v-col cols="3" v-for="image in croppedImages" :key="image">
             <v-img aspect-ratio="1" v-if="croppedImages != null" :src="image"/>
         </v-col>
-        <v-dialog v-model="isImagePicked" persistent max-width="50%">
+        <v-dialog v-model="isImagePicked" persistent>
             <v-card>
                 <Cropper ref="cropper" class="cropper" :src="selectedImage" :stencil-props="{ aspectRatio: 1/1 }"/>
                 <v-card-actions>
@@ -30,16 +32,11 @@
           Cropper
         },
         data: () => ({
-            height: 0,
             selectedImages: [],
             selectedImage: null,
             croppedImages: [],
             croppedImage: null,
-            isImagePicked: false,
-            windowSize: {
-                x: 0,
-                y: 0,
-            },
+            isImagePicked: false
         }),
         methods: {
             //trick because button acts as input
@@ -64,10 +61,22 @@
                 this.croppedImages.push(canvas.toDataURL())
                 this.isImagePicked = false
             }
-        },
+        }
     }
 </script>
 
 <style scoped>
+    .uploader{
+        border: 2px solid teal;
+        border-radius: 10px;
+        background: white;
+        width: 200px;
+        height: 200px;
+        animation: blinkingBorder 3s infinite;
+        padding-top: 80px
+    }
 
+    @keyframes blinkingBorder{
+        50%		{ border-color: pink;}
+    }
 </style>

@@ -103,7 +103,7 @@
 
     .img-border {
         border: 35px solid transparent;
-        border-image: url(../assets/frames/1.png) 100 stretch;
+        border-image: url(../assets/frames/bright.png) 100 stretch;
     }
 
     .imageFull {

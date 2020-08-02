@@ -1,21 +1,31 @@
 <template>
-    <v-container fill-height>
-        <v-row class="fill-height">
+    <v-container class="py-0" fill-height id="v-container" >
+        <v-row>
             <v-col>
-                <v-row  style="height: 5%">
-                    <v-col align="center">{{ pages[activePagePointer].title }}</v-col>
+                <v-row>
+                    <v-col align="center">
+                        <v-card class="pa-4 teal lighten-3">
+                            <span class="font-weight-regular">{{ pages[activePagePointer].title }}</span>
+                        </v-card>
+                    </v-col>
                 </v-row>
-                <v-row class="fill-height" align="stretch" style="height: 90%">
+                <v-row no-gutters>
                     <v-col>
-                        <v-card class="fill-height">
+                        <v-card class="teal lighten-5">
                             <component :is="pages[activePagePointer].component"/>
                         </v-card>
                     </v-col>
                 </v-row>
-                <v-row style="height: 5%" justify="space-around">
-                    <v-col align="center" cols="4"><v-btn icon :disabled="pages[activePagePointer].backDisabled" @click="activePagePointer--"><v-icon>mdi-arrow-left</v-icon></v-btn></v-col>
-                    <v-col align="center" cols="4">{{ pages[activePagePointer].number }}/{{ pages.length }}</v-col>
-                    <v-col align="center" cols="4"><v-btn icon :disabled="pages[activePagePointer].nextDisabled" @click="activePagePointer++"><v-icon>mdi-arrow-right</v-icon></v-btn></v-col>
+                <v-row justify="space-around">
+                    <v-col>
+                        <v-card class="teal lighten-3">
+                            <v-row>
+                                <v-col align="center" cols="4"><v-btn class="white" :disabled="pages[activePagePointer].backDisabled" @click="activePagePointer--">Vissza</v-btn></v-col>
+                                <v-col align="center" cols="4">{{ pages[activePagePointer].number }}/{{ pages.length }}</v-col>
+                                <v-col align="center" cols="4"><v-btn class="white" :disabled="pages[activePagePointer].nextDisabled" @click="activePagePointer++">Tovább</v-btn></v-col>
+                            </v-row>
+                        </v-card>
+                    </v-col>
                 </v-row>
             </v-col>
         </v-row>
@@ -26,6 +36,7 @@
 <script>
     import FrameSelector from "../components/FrameSelector";
     import ImageUploader from "../components/ImageUploader";
+    import AddressForm from "../components/AddressForm";
 
     export default {
         components: {
@@ -33,9 +44,10 @@
         },
         data: () => ({
             activePagePointer: 0,
+            activeFame: null,
             pages: [
                 {
-                    title: 'Keret Választása',
+                    title: 'Keret Választás',
                     number: 1,
                     backDisabled: true,
                     nextDisabled: false,
@@ -50,30 +62,32 @@
 
                 },
                 {
-                    title: 'Szállítási cím',
+                    title: 'Számlázási és Szállítási Adatok',
                     number: 3,
                     backDisabled: false,
                     nextDisabled: false,
-                    component: null
+                    component: AddressForm
                 },
                 {
-                    title: 'Fizetési mód',
+                    title: 'Fizetési Mód',
                     number: 4,
                     backDisabled: false,
                     nextDisabled: false,
                     component: null
                 },
                 {
-                    title: 'Vásárlás',
+                    title: 'Áttekintés és Vásárlás',
                     number: 5,
                     backDisabled: false,
                     nextDisabled: true,
                     component: null
                 }
             ]
-        })
+        }),
+        methods: {
+        }
     }
 </script>
-<style scoped>
 
+<style scoped>
 </style>

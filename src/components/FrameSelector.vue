@@ -1,43 +1,13 @@
-<!--<template v-for="(frame, i) in frames">-->
-<!--    <v-col :key="i" cols="12" md="2">-->
-<!--        <v-hover v-slot:default="{ hover }">-->
-<!--            <v-card class="frame mx-2" :elevation="hover ? 12 : 2" :class="[{'on-hover': hover}, {'selected': frame.selected}]" v-on:click="selectFrame(frame)">-->
-<!--                <v-img :src="require('@/assets/frames/' + frame.id + '.png' )"/>-->
-<!--            </v-card>-->
-<!--        </v-hover>-->
-<!--    </v-col>-->
-<!--</template>-->
-
 <template>
-    <v-row class="fill-height" align="center" justify="space-around">
-        <v-hover v-slot:default="{ hover }">
-            <v-col cols="2" xs="6">
-                <v-card class="frame" :elevation="hover ? 12 : 2" :class="[{'on-hover': hover}, {'selected': frames[0].selected}]" v-on:click="selectFrame(frames[0])">
-                    <v-img :src="require('@/assets/frames/1.png' )"/>
+    <v-row class="fill-height pa-2" align="center" justify="center">
+        <v-col cols="6" sm="3" v-for="frame in frames" :key="frame.id">
+            <v-hover v-slot:default="{ hover }">
+                <v-card v-ripple="{ center: true }" class="frame pa-2 justify-center" :elevation="hover ? 12 : 2" :class="[{'on-hover': hover}, {'selected': frame.selected}]" @click="selectFrame(frame)">
+                    <v-img :src="require('@/assets/frames/'+ frame.image )"/>
+                    <p class="mt-5 text-center"  :class="[`text-caption`]">{{ frame.title }}</p>
                 </v-card>
-            </v-col>
-        </v-hover>
-        <v-hover v-slot:default="{ hover }">
-            <v-col cols="2" xs="6">
-                <v-card class="frame" :elevation="hover ? 12 : 2" :class="[{'on-hover': hover}, {'selected': frames[1].selected}]" v-on:click="selectFrame(frames[1])">
-                    <v-img :src="require('@/assets/frames/2.png' )"/>
-                </v-card>
-            </v-col>
-        </v-hover>
-        <v-hover v-slot:default="{ hover }">
-            <v-col cols="2" xs="6">
-                <v-card class="frame" :elevation="hover ? 12 : 2" :class="[{'on-hover': hover}, {'selected': frames[2].selected}]" v-on:click="selectFrame(frames[2])">
-                    <v-img :src="require('@/assets/frames/3.png' )"/>
-                </v-card>
-            </v-col>
-        </v-hover>
-        <v-hover v-slot:default="{ hover }">
-            <v-col cols="2" xs="6">
-                <v-card class="frame" :elevation="hover ? 12 : 2" :class="[{'on-hover': hover}, {'selected': frames[3].selected}]" v-on:click="selectFrame(frames[3])">
-                    <v-img :src="require('@/assets/frames/4.png' )"/>
-                </v-card>
-            </v-col>
-        </v-hover>
+            </v-hover>
+        </v-col>
     </v-row>
 </template>
 
@@ -49,31 +19,29 @@
             frames: [
                 {
                     id: 1,
-                    title: 'Világos keret',
-                    selected: false,
-                    color: 'Bright',
-                    type: 'Full'
+                    title: 'Világos',
+                    image: 'bright.png',
+                    selected: false
                 },
                 {
                     id: 2,
-                    title: 'Világos keret paszpartuval',
-                    selected: false,
-                    color: 'Bright',
-                    type: 'Mount'
+                    title: 'Világos Paszpartuval',
+                    image: 'bright_pp.png',
+                    selected: false
+
                 },
                 {
                     id: 3,
-                    title: 'Sötét keret',
+                    title: 'Sötét',
+                    image: 'dark.png',
                     selected: false,
-                    color: 'Dark',
-                    type: 'Full'
+
                 },
                 {
                     id: 4,
-                    title: 'Sötét keret paszpartuval',
-                    selected: false,
-                    color: 'Dark',
-                    type: 'Mount'
+                    title: 'Sötét Paszpartuval',
+                    image: 'dark_pp.png',
+                    selected: false
                 }
             ]
         }),
