@@ -2,7 +2,7 @@
     <v-container>
         <v-row class="fill-height" align="center" justify="center">
             <template v-for="(frame, i) in frames">
-                <v-col :key="i" cols="12" md="2">
+                <v-col :key="i" cols="3">
                     <v-hover v-slot:default="{ hover }">
                         <v-card class="mx-2" :elevation="hover ? 12 : 2" :class="[{'on-hover': hover}, {'selected': frame.selected}]" v-on:click="selectFrame(frame)">
                             <v-img :src="require('@/assets/frames/' + frame.id + '.png' )"/>
