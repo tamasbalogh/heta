@@ -1,13 +1,13 @@
 <template>
-    <v-row class="fill-height" align="center" justify="center">
+    <v-row align="center" justify="center" v-resize="imageHeight">
         <v-col cols="3" align="center">
-            <div  @click="onUploadClick()" class="uploader">
+            <div  @click="onUploadClick()" class="uploader" :width="imageWidth">
                 <v-icon class="uploaderIcon" color="teal" x-large>mdi-upload</v-icon>
             </div>
             <input class="d-none" ref="uploader" type="file" accept="image/*" @change="onImagePick()">
         </v-col>
         <v-col cols="3" v-for="image in croppedImages" :key="image">
-            <v-img aspect-ratio="1" v-if="croppedImages != null" :src="image"/>
+            <v-img v-if="croppedImages != null" :src="image"/>
         </v-col>
         <v-dialog v-model="isImagePicked" persistent>
             <v-card>
@@ -23,7 +23,6 @@
 </template>
 
 <script>
-
     import { Cropper } from 'vue-advanced-cropper'
 
     export default {
@@ -32,6 +31,7 @@
           Cropper
         },
         data: () => ({
+            imageWidth: 0,
             selectedImages: [],
             selectedImage: null,
             croppedImages: [],
@@ -60,6 +60,68 @@
                 console.log(coordinates)
                 this.croppedImages.push(canvas.toDataURL())
                 this.isImagePicked = false
+            },
+            imageHeight() {
+                var cols=3
+                var size=0
+                if (cols == 2) {
+                    switch (this.$vuetify.breakpoint.name) {
+                        case 'xs':
+                            size=59
+                            break
+                        case 'sm':
+                            size=93
+                            break
+                        case 'md':
+                            size=126
+                            break
+                        case 'lg':
+                            size=174
+                            break
+                        case 'xl':
+                            size=274
+                            break
+                    }
+                }
+                if (cols == 3) {
+                    switch (this.$vuetify.breakpoint.name) {
+                        case 'xs':
+                            size=101
+                            break
+                        case 'sm':
+                            size=152
+                            break
+                        case 'md':
+                            size=201
+                            break
+                        case 'lg':
+                            size=272
+                            break
+                        case 'xl':
+                            size=422
+                            break
+                    }
+                }
+                if (cols == 4) {
+                    switch (this.$vuetify.breakpoint.name) {
+                        case 'xs':
+                            size=142
+                            break
+                        case 'sm':
+                            size=210
+                            break
+                        case 'md':
+                            size=276
+                            break
+                        case 'lg':
+                            size=371
+                            break
+                        case 'xl':
+                            size=571
+                            break
+                    }
+                }
+                this.imageWidth = size
             }
         }
     }
@@ -70,13 +132,13 @@
         border: 2px solid teal;
         border-radius: 10px;
         background: white;
-        width: 200px;
-        height: 200px;
         animation: blinkingBorder 3s infinite;
-        padding-top: 80px
+        width: 270px;
+        height: 270px;
+        padding-top: 110px;
     }
 
     @keyframes blinkingBorder{
-        50%		{ border-color: pink;}
+        50%		{ border-color: pink; }
     }
 </style>
