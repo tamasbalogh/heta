@@ -9,7 +9,7 @@
         <v-col cols="3" v-for="image in croppedImages" :key="image">
             <v-img v-if="croppedImages != null" :src="image"/>
         </v-col>
-        <v-dialog v-model="isImagePicked" persistent>
+        <v-dialog  v-model="isImagePicked" persistent>
             <v-card>
                 <Cropper ref="cropper" class="cropper" :src="selectedImage" :stencil-props="{ aspectRatio: 1/1 }"/>
                 <v-card-actions>

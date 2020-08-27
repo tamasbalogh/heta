@@ -95,7 +95,6 @@
                 this.testBody = Math.floor(realHeight * 0.92)
                 console.log('header ' + this.testHeaderFooter + ' body ' + this.testBody)
                 this.$nextTick(() => {
-
                 })
             }
         }
