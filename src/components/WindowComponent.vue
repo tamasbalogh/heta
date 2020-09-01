@@ -7,8 +7,9 @@
                 </v-col>
             </v-row>
         </v-app-bar>
-        <v-main style="border: 1px solid blue">
-            <v-container style="border: 1px solid red">
+        <v-main>
+            <v-container class="fill-height">
+                <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-parallax>
                 <component :is="pages[activePagePointer].component"/>
             </v-container>
         </v-main>

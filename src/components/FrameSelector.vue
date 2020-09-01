@@ -1,5 +1,5 @@
 <template>
-    <v-row justify="center" style="border: 1px solid yellow">
+    <v-row justify="center" align="center">
         <v-col cols="6" sm="3" v-for="frame in frames" :key="frame.id">
             <v-hover v-slot:default="{ hover }">
                 <v-card v-ripple="{ center: true }" class="frame pa-2 justify-center" :elevation="hover ? 12 : 2" :class="[{'on-hover': hover}, {'selected': frame.selected}]" @click="selectFrame(frame)">
