@@ -2,8 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Test from '../views/Test.vue'
-import Window from '../views/Window.vue'
-import WindowComponent from "../components/WindowComponent";
 
 Vue.use(VueRouter)
 
@@ -17,16 +15,6 @@ Vue.use(VueRouter)
     path: '/test',
     name: 'Test',
     component: Test
-  },
-  {
-    path: '/window',
-    name: 'Window',
-    component: Window
-  },
-  {
-    path: '/windowComponent',
-    name: 'WindowComponent',
-    component: WindowComponent
   },
   {
     path: '/order/:type',
