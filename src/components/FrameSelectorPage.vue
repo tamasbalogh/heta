@@ -2,9 +2,9 @@
     <v-row justify="center" align="center">
         <v-col cols="6" sm="3" v-for="frame in frames" :key="frame.id">
             <v-hover v-slot:default="{ hover }">
-                <v-card v-ripple="{ center: true }" class="frame pa-2 justify-center" :elevation="hover ? 12 : 2" :class="[{'on-hover': hover}, {'selected': frame.selected}]" @click="selectFrame(frame)">
+                <v-card class="frame pa-2 justify-center" :elevation="hover ? 12 : 2" :class="[{'on-hover': hover}, {'selected': frame.selected}]" @click.native="selectFrame(frame)">
                     <v-img :src="require('@/assets/frames/'+ frame.image )"/>
-                    <p class="mt-5 text-center"  :class="[`text-caption`]">{{ frame.title }}</p>
+                    <p class="mt-5 text-center" :class="[`text-caption`]">{{ frame.title }}</p>
                 </v-card>
             </v-hover>
         </v-col>
@@ -47,12 +47,12 @@
         }),
         methods: {
             selectFrame(frame){
-                for (var i = 0; i < this.frames.length; i++) {
+                for (let i = 0; i < this.frames.length; i++) {
                     this.frames[i].selected = false;
                 }
                 frame.selected = true
-                console.log("selected frame.id is: " + frame.id)
                 this.selectedFrame = frame
+                this.$emit('updateSelectedFrame', frame)
             }
         }
     }

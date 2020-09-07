@@ -35,8 +35,8 @@
                     reader.readAsDataURL(this.$refs.uploader.files[0]);
                     reader.onload = (e) => {
                         this.selectedImage = e.target.result;
-                        this.isImagePicked = true
-                        console.log(this.selectedImage)
+                        this.$emit("updateSelectedImage", {'count': this.$refs.uploader.files.length, 'image': this.selectedImage})
+
                     };
                 }
 
@@ -50,8 +50,7 @@
                             this.selectedImages.push(e.target.result);
                         };
                     }
-                    this.isImagePicked = true
-                    console.log(this.selectedImages)
+                    this.$emit("updateSelectedImage", {'count': this.$refs.uploader.files.length, 'array': this.selectedImages})
                 }
             },
         }

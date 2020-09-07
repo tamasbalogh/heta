@@ -11,7 +11,12 @@
 <script>
     export default {
         name: "OrderHeader",
-        props: ['title'],
+        props: {
+            title: {
+                type: String,
+                required: true
+            }
+        }
     }
 </script>
 

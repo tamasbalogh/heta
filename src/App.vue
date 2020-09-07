@@ -6,7 +6,7 @@
     </v-container>
     <v-main>
         <v-container class="fill-height">
-            <component :is="pages[activePagePointer].component"/>
+            <component :is="pages[activePagePointer].component" v-on:updateSelectedFrame="updateSelectedFrame($event)"/>
         </v-container>
     </v-main>
     <v-container>
@@ -36,22 +36,22 @@
       data: () => ({
           activePagePointer: 0,
           pages: [
-            {
-              title: 'Keret Választás',
-              number: 1,
-              backDisabled: true,
-              nextDisabled: false,
-              component: FrameSelectorPage
-            },
-            {
-              title: 'Képek Feltöltése',
-              number: 2,
-              backDisabled: false,
-              nextDisabled: false,
-              component: ImageUploaderPage
-
-            },
-            {
+              {
+                  number: 1,
+                  title: 'Keret Választás',
+                  backDisabled: true,
+                  nextDisabled: false,
+                  component: FrameSelectorPage,
+                  result: null,
+              },
+              {
+                  title: 'Képek Feltöltése',
+                  number: 2,
+                  backDisabled: false,
+                  nextDisabled: false,
+                  component: ImageUploaderPage
+              },
+              {
               title: 'Számlázási és Szállítási Adatok',
               number: 3,
               backDisabled: false,
@@ -77,7 +77,11 @@
       methods: {
           updatePagePointer(updatedPagePointer){
               this.activePagePointer = updatedPagePointer-1
+          },
+          updateSelectedFrame(selectedFrame){
+              this.pages[0].result = selectedFrame
+              console.log('SelectedFrame: ' + this.pages[0].result  .title)
           }
-      }
+      },
   }
 </script>
