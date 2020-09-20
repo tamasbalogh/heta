@@ -35,8 +35,7 @@
                     reader.readAsDataURL(this.$refs.uploader.files[0]);
                     reader.onload = (e) => {
                         this.selectedImage = e.target.result;
-                        this.$emit("updateSelectedImage", {'count': this.$refs.uploader.files.length, 'image': this.selectedImage})
-
+                        this.$emit("addImage", this.selectedImage)
                     };
                 }
 
@@ -47,10 +46,10 @@
                         let reader = new FileReader();
                         reader.readAsDataURL(this.$refs.uploader.files[i]);
                         reader.onload = (e) => {
-                            this.selectedImages.push(e.target.result);
+                            this.selectedImage = e.target.result;
+                            this.$emit("addImage", this.selectedImage)
                         };
                     }
-                    this.$emit("updateSelectedImage", {'count': this.$refs.uploader.files.length, 'array': this.selectedImages})
                 }
             },
         }

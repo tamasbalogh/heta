@@ -1,10 +1,9 @@
 <template>
-    <v-dialog v-model="dialog" persistent :max-width="this.$vuetify.breakpoint.width/1.5" :max-height="this.$vuetify.breakpoint.height/1.5">
+    <v-dialog v-model="dialog" >
         <template v-slot:activator="{ on, attrs }">
             <v-btn
                     v-bind="attrs"
-                    v-on="on"
-            >
+                    v-on="on">
                 Open Dialog
             </v-btn>
         </template>
@@ -36,7 +35,6 @@
                 const { coordinates, canvas } = this.$refs.cropper.getResult()
                 console.log(coordinates)
                 this.croppedImages.push(canvas.toDataURL())
-                this.newlySelectedImages = []
             }
         }
     }
