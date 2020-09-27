@@ -1,12 +1,22 @@
 <template>
     <v-row justify="center" align="center">
-        <v-col cols="6" sm="3" v-for="frame in frames" :key="frame.id">
+        <v-col cols="6" sm="3" v-for="frame in frames" :key="frame.id" @click="selectFrame(frame.id)">
+
             <v-hover v-slot:default="{ hover }">
-                <v-card class="frame pa-2 justify-center" :elevation="hover ? 12 : 2" :class="[{'on-hover': hover}, {'selected': frame.selected}]" @click.native="selectFrame(frame)">
+               <v-card v-if="hover" class="frame pa-2 justify-center on-hover" elevation="12">
+                    <v-img :src="require('@/assets/frames/'+ frame.image )"/>
+                    <p class="mt-5 text-center" :class="[`text-caption`]">{{ frame.title }}</p>
+                </v-card>
+                <v-card v-else-if="frame.selected" class="frame pa-2 justify-center selected" elevation="2">
+                    <v-img :src="require('@/assets/frames/'+ frame.image )"/>
+                    <p class="mt-5 text-center" :class="[`text-caption`]">{{ frame.title }}</p>
+                </v-card>
+                <v-card v-else class="frame pa-2 justify-center" elevation="2">
                     <v-img :src="require('@/assets/frames/'+ frame.image )"/>
                     <p class="mt-5 text-center" :class="[`text-caption`]">{{ frame.title }}</p>
                 </v-card>
             </v-hover>
+
         </v-col>
     </v-row>
 </template>
@@ -14,31 +24,41 @@
 <script>
     export default {
         name: "FrameSelector",
+        props: {
+            selectedFrame: {
+                type: Object,
+                required: false
+            }
+        },
+        created() {
+            if (this.selectedFrame != null) {
+                this.selectFrame(this.selectedFrame.id)
+            }
+        },
         data: () => ({
-            selectedFrame: null,
             frames: [
                 {
-                    id: 1,
+                    id: 0,
                     title: 'Világos',
                     image: 'bright.png',
                     selected: false
                 },
                 {
-                    id: 2,
+                    id: 1,
                     title: 'Világos Paszpartuval',
                     image: 'bright_pp.png',
                     selected: false
 
                 },
                 {
-                    id: 3,
+                    id: 2,
                     title: 'Sötét',
                     image: 'dark.png',
                     selected: false,
 
                 },
                 {
-                    id: 4,
+                    id: 3,
                     title: 'Sötét Paszpartuval',
                     image: 'dark_pp.png',
                     selected: false
@@ -46,13 +66,15 @@
             ]
         }),
         methods: {
-            selectFrame(frame){
+            selectFrame(id){
                 for (let i = 0; i < this.frames.length; i++) {
-                    this.frames[i].selected = false;
+                    if(this.frames[i].id == id){
+                        this.frames[i].selected = true
+                        this.$emit('updateSelectedFrame', this.frames[i])
+                    } else {
+                        this.frames[i].selected = false;
+                    }
                 }
-                frame.selected = true
-                this.selectedFrame = frame
-                this.$emit('updateSelectedFrame', frame)
             }
         }
     }

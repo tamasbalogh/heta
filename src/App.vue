@@ -6,7 +6,11 @@
     </v-container>
     <v-main>
         <v-container class="fill-height">
-            <component :is="pages[activePagePointer].component" v-on:updateSelectedFrame="updateSelectedFrame($event)"/>
+            <component :is="pages[activePagePointer].component"
+                       :selected-frame="pages[0].resultFrame"
+                       :images="pages[1].resultImages"
+                       v-on:updateSelectedFrame="updateSelectedFrame($event)"
+                       v-on:updateImages="updateImages($event)"/>
         </v-container>
     </v-main>
     <v-container>
@@ -40,16 +44,17 @@
                   number: 1,
                   title: 'Keret Választás',
                   backDisabled: true,
-                  nextDisabled: false,
+                  nextDisabled: true,
                   component: FrameSelectorPage,
-                  result: null,
+                  resultFrame: null,
               },
               {
                   title: 'Képek Feltöltése',
                   number: 2,
                   backDisabled: false,
-                  nextDisabled: false,
-                  component: ImageUploaderPage
+                  nextDisabled: true,
+                  component: ImageUploaderPage,
+                  resultImages: []
               },
               {
               title: 'Számlázási és Szállítási Adatok',
@@ -79,8 +84,12 @@
               this.activePagePointer = updatedPagePointer-1
           },
           updateSelectedFrame(selectedFrame){
-              this.pages[0].result = selectedFrame
-              console.log('SelectedFrame: ' + this.pages[0].result  .title)
+              this.pages[0].nextDisabled = false
+              this.pages[0].resultFrame = selectedFrame
+          },
+          updateImages(images){
+              this.pages[1].nextDisabled = false
+              this.pages[1].resultImages = images
           }
       },
   }
