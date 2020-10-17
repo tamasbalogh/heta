@@ -16,42 +16,47 @@
         name: "ImageSelector",
         props: {
             cols: {
-                type: Number,
-                default: 3
+                type: String,
+                default: "3"
             }
         },
         data: () => ({
-            selectedImage: null,
-            selectedImages: []
         }),
         methods: {
             onUploadClick(){
                 this.$refs.uploader.click()
             },
+
             onImagePick(){
+
+                let vue_instance = this
+
                 if (this.$refs.uploader.files.length == 1){
-                    console.log('Single image selected.')
                     let reader = new FileReader();
                     reader.readAsDataURL(this.$refs.uploader.files[0]);
-                    reader.onload = (e) => {
-                        this.selectedImage = e.target.result;
-                        this.$emit("addImage", this.selectedImage)
+                    reader.onloadend = (e) => {
+                        const img = new Image()
+                        img.onload = function() {
+                            vue_instance.$emit("addImage", { base64: this.src, width: this.width, height: this.height})
+                        }
+                        img.src = e.target.result
                     };
                 }
 
                 if (this.$refs.uploader.files.length >= 2) {
-                    console.log('Multiple images selected.')
-                    let files = this.$refs.uploader.files;
-                    for (let i = 0; i < files.length; i++){
+                    for (let i = 0; i < this.$refs.uploader.files.length; i++){
                         let reader = new FileReader();
                         reader.readAsDataURL(this.$refs.uploader.files[i]);
-                        reader.onload = (e) => {
-                            this.selectedImage = e.target.result;
-                            this.$emit("addImage", this.selectedImage)
+                        reader.onloadend = (e) => {
+                            const img = new Image()
+                            img.onload = function() {
+                                vue_instance.$emit("addImage", { base64: this.src, width: this.width, height: this.height})
+                            }
+                            img.src = e.target.result
                         };
                     }
                 }
-            },
+            }
         }
     }
 </script>

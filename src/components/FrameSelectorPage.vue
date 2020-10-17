@@ -41,27 +41,49 @@
                     id: 0,
                     title: 'Világos',
                     image: 'bright.png',
-                    selected: false
+                    selected: false,
+                    style: {
+                        top: 5,
+                        bottom: 4.8,
+                        left: 5.2,
+                        right: 4.5
+                    }
                 },
                 {
                     id: 1,
                     title: 'Világos Paszpartuval',
                     image: 'bright_pp.png',
-                    selected: false
-
+                    selected: false,
+                    style: {
+                        top: 26.5,
+                        bottom: 26.5,
+                        left: 26.5,
+                        right: 26.5
+                    }
                 },
                 {
                     id: 2,
                     title: 'Sötét',
                     image: 'dark.png',
                     selected: false,
-
+                    style: {
+                        top: 5,
+                        bottom: 4.8,
+                        left: 5,
+                        right: 4.5
+                    }
                 },
                 {
                     id: 3,
                     title: 'Sötét Paszpartuval',
                     image: 'dark_pp.png',
-                    selected: false
+                    selected: false,
+                    style: {
+                        top: 26.5,
+                        bottom: 26.5,
+                        left: 26.5,
+                        right: 26.5
+                    }
                 }
             ]
         }),

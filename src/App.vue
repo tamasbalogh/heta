@@ -10,7 +10,8 @@
                        :selected-frame="pages[0].resultFrame"
                        :images="pages[1].resultImages"
                        v-on:updateSelectedFrame="updateSelectedFrame($event)"
-                       v-on:updateImages="updateImages($event)"/>
+                       v-on:updateImages="updateImages($event)"
+                       v-on:updateAddress="updateAddress($event)"/>
         </v-container>
     </v-main>
     <v-container>
@@ -57,11 +58,12 @@
                   resultImages: []
               },
               {
-              title: 'Számlázási és Szállítási Adatok',
-              number: 3,
-              backDisabled: false,
-              nextDisabled: false,
-              component: AddressFormPage
+                  title: 'Számlázási és Szállítási Adatok',
+                  number: 3,
+                  backDisabled: false,
+                  nextDisabled: false,
+                  component: AddressFormPage,
+                  resultAddress: null
             },
             {
               title: 'Fizetési Mód',
@@ -88,8 +90,15 @@
               this.pages[0].resultFrame = selectedFrame
           },
           updateImages(images){
-              this.pages[1].nextDisabled = false
+              if (images.length >= 3){
+                  this.pages[1].nextDisabled = false
+              } else {
+                  this.pages[1].nextDisabled = true
+              }
               this.pages[1].resultImages = images
+          },
+          updateAddress(address){
+              this.pages[2].resultAddress = address
           }
       },
   }

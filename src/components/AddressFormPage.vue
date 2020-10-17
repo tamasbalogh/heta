@@ -10,7 +10,7 @@
                 <v-row justify="center">
                     <v-col cols="10" md="5">
                         <v-text-field
-                                v-model="name"
+                                v-model="bName"
                                 :rules="nameRules"
                                 label="Név *"
                                 outlined
@@ -18,13 +18,13 @@
                                 color="teal"
                         />
                         <v-text-field
-                                v-model="company"
+                                v-model="bCompany"
                                 label="Cégnév"
                                 outlined
                                 color="teal"
                         />
                         <v-text-field
-                                v-model="street"
+                                v-model="bStreet"
                                 :rules="streetRules"
                                 label="Utca, Házszám * (Épület, Emelet, Ajtó)"
                                 required
@@ -32,7 +32,7 @@
                                 color="teal"
                         />
                         <v-text-field
-                                v-model="city"
+                                v-model="bCity"
                                 :rules="cityRules"
                                 label="Város *"
                                 required
@@ -40,7 +40,7 @@
                                 color="teal"
                         />
                         <v-text-field
-                                v-model="postalCode"
+                                v-model="bPostalCode"
                                 :rules="postalCodeRules"
                                 label="Irányítószám *"
                                 required
@@ -72,7 +72,7 @@
                                 color="teal">
 
                             <v-text-field
-                                    v-model="name"
+                                    v-model="aName"
                                     :rules="nameRules"
                                     label="Név *"
                                     required
@@ -80,7 +80,7 @@
                                     color="teal"
                             />
                             <v-text-field
-                                    v-model="street"
+                                    v-model="aStreet"
                                     :rules="streetRules"
                                     label="Utca, Házszám * (Épület, Emelet, Ajtó)"
                                     required
@@ -88,7 +88,7 @@
                                     color="teal"
                             />
                             <v-text-field
-                                    v-model="city"
+                                    v-model="aCity"
                                     :rules="cityRules"
                                     label="Város *"
                                     required
@@ -96,7 +96,7 @@
                                     color="teal"
                             />
                             <v-text-field
-                                    v-model="postalCode"
+                                    v-model="aPostalCode"
                                     :rules="postalCodeRules"
                                     label="Irányítószám *"
                                     required
@@ -148,23 +148,27 @@
         name: "AddressForm",
         data: () => ({
             valid: true,
-            name: '',
+            bName: '',
+            aName: '',
             nameRules: [
                 v => !!v || 'Mező kitöltése kötelező.'
             ],
-            company: '',
+            bCompany: '',
             companyRules: [
                 v => !!v || 'Mező kitöltése kötelező.'
             ],
-            street: '',
+            bStreet: '',
+            aStreet: '',
             streetRules: [
                 v => !!v || 'Mező kitöltése kötelező.',
             ],
-            city: '',
+            bCity: '',
+            aCity: '',
             cityRules: [
                 v => !!v || 'Mező kitöltése kötelező.',
             ],
-            postalCode: '',
+            aPostalCode: '',
+            bPostalCode: '',
             postalCodeRules: [
                 v => !!v || 'Mező kitöltése kötelező.',
             ],
@@ -179,17 +183,7 @@
             ],
             checkbox: false,
         }),
-
         methods: {
-            validate () {
-                this.$refs.form.validate()
-            },
-            reset () {
-                this.$refs.form.reset()
-            },
-            resetValidation () {
-                this.$refs.form.resetValidation()
-            },
         },
     }
 </script>
